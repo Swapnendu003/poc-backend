@@ -1,0 +1,35 @@
+{
+  "name": "poc-backend",
+  "version": "1.0.0",
+  "description": "Backend for Keploy App Dashboard with Metrics and Charts",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "seed": "node utils/seedData.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "keploy",
+    "dashboard",
+    "metrics",
+    "charts",
+    "gsoc"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "mongoose": "^7.6.5",
+    "morgan": "^1.10.0",
+    "ws": "^8.18.1",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
