@@ -13,6 +13,17 @@ const initWebSocket = (server) => {
       message: 'Connected to Keploy Dashboard WebSocket Server'
     }));
     
+    // Set up heartbeat interval
+    const heartbeatInterval = setInterval(() => {
+      if (ws.readyState === WebSocket.OPEN) {
+        ws.send(JSON.stringify({
+          type: 'heartbeat',
+          timestamp: new Date().toISOString()
+        }));
+        console.log('Heartbeat sent');
+      }
+    }, 30000); 
+    
     ws.on('message', (message) => {
       try {
         const data = JSON.parse(message);
@@ -33,8 +44,15 @@ const initWebSocket = (server) => {
       }
     });
     
+    // Add error handler
+    ws.on('error', (error) => {
+      console.error('WebSocket error:', error);
+      clearInterval(heartbeatInterval);
+    });
+    
     ws.on('close', () => {
       console.log('Client disconnected');
+      clearInterval(heartbeatInterval); // Clear heartbeat on disconnect
     });
   });
   
