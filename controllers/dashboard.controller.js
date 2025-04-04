@@ -45,6 +45,14 @@ exports.updateDashboardConfig = async (req, res) => {
       });
     }
 
+    if (widgets && Array.isArray(widgets)) {
+      widgets.forEach((widget) => {
+        if (widget._id && typeof widget._id === 'string') {
+          delete widget._id;
+        }
+      });
+    }
+
     let dashboardConfig = await DashboardConfig.findOne({ userId });
 
     if (!dashboardConfig) {
